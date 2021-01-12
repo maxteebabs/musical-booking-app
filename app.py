@@ -426,7 +426,7 @@ def edit_artist_submission(artist_id):
 @app.route('/venues/<int:venue_id>/edit', methods=['GET'])
 def edit_venue(venue_id):
     form = VenueForm()
-    data = Venue.query.get(artist_id)
+    data = Venue.query.get(venue_id)
     if not data:
         abort(404)
 
@@ -476,7 +476,7 @@ def edit_venue_submission(venue_id):
 
         db.session.update(venue)
         db.session.commit()
-        message = 'Venue ' + name + ' was successfully updated!'
+        message = 'Venue ' + form.name.data + ' was successfully updated!'
     except:
         db.session.rollback()
         print(sys.exc_info())
@@ -523,7 +523,7 @@ def create_artist_submission():
 
         db.session.add(artist)
         db.session.commit()
-        message = 'Artist ' + name + ' was successfully listed!'
+        message = 'Artist ' + form.name.data + ' was successfully listed!'
     except:
         db.session.rollback()
         print(sys.exc_info())
